@@ -69,7 +69,7 @@ class ViewController: UIViewController, AVPictureInPictureControllerDelegate {
     // 配置播放器
     private func setupPlayer() {
         playerLayer = AVPlayerLayer()
-        playerLayer.frame = .init(x: 90, y: 90, width: 200, height: 150)
+        playerLayer.frame = .init(x: -200, y: -150, width: 200, height: 150)
         
         let mp4Video = Bundle.main.url(forResource: "横向视频", withExtension: "MP4")
         let asset = AVAsset.init(url: mp4Video!)
@@ -100,6 +100,7 @@ class ViewController: UIViewController, AVPictureInPictureControllerDelegate {
     @objc private func pipButtonClicked() {
         if pipController.isPictureInPictureActive {
             pipController.stopPictureInPicture()
+            cancelTimer()
         } else {
             pipController.startPictureInPicture()
             countDown()
@@ -171,7 +172,7 @@ class ViewController: UIViewController, AVPictureInPictureControllerDelegate {
     }
     
     func pictureInPictureControllerDidStopPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {
-        //stopTimer()
+        cancelTimer()
     }
     
 }
